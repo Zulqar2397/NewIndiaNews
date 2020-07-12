@@ -1,22 +1,15 @@
 package com.newindianews.app.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.beans.factory.annotation.Value;
 
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "admins")
-public class Admins {
-
+@Table(name = "masters")
+public class Masters {
 	@Id
 	@NotNull
 	@Column(name = "email")
@@ -34,27 +27,16 @@ public class Admins {
 	@Column(name = "password")
 	private String password;
 	
-	@NotNull
-	@Column(name = "approval")
-	@Value("false")
-	private boolean approval;
-
-	@OneToMany(mappedBy = "admins", cascade = CascadeType.PERSIST)
-	private List<News> newsList;
-
-	public Admins() {
+	public Masters() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admins(String email, String firstName, String lastName, String password, boolean approval,
-			List<News> newsList) {
+	public Masters(String email, String firstName, String lastName, String password) {
 		super();
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
-		this.approval = approval;
-		this.newsList = newsList;
 	}
 
 	public String getEmail() {
@@ -89,31 +71,13 @@ public class Admins {
 		this.password = password;
 	}
 
-	public boolean isApproval() {
-		return approval;
-	}
-
-	public void setApproval(boolean approval) {
-		this.approval = approval;
-	}
-
-	public List<News> getNewsList() {
-		return newsList;
-	}
-
-	public void setNewsList(List<News> newsList) {
-		this.newsList = newsList;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (approval ? 1231 : 1237);
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((newsList == null) ? 0 : newsList.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
@@ -126,9 +90,7 @@ public class Admins {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Admins other = (Admins) obj;
-		if (approval != other.approval)
-			return false;
+		Masters other = (Masters) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -144,11 +106,6 @@ public class Admins {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (newsList == null) {
-			if (other.newsList != null)
-				return false;
-		} else if (!newsList.equals(other.newsList))
-			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -159,9 +116,10 @@ public class Admins {
 
 	@Override
 	public String toString() {
-		return "Admins [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+ password + ", approval=" + approval + ", newsList=" + newsList + "]";
+		return "Masters [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
+				+ password + "]";
 	}
-
+	
+	
 	
 }
