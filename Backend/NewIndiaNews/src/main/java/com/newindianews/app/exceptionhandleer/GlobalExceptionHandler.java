@@ -10,7 +10,7 @@ import com.newindianews.app.dto.ErrorDto;
 import com.newindianews.app.dto.ResponseDto;
 import com.newindianews.app.exception.AppException;
 
-@RestControllerAdvice(assignableTypes = {Controller.class})
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 	@ExceptionHandler(AppException.class)
 	public ResponseEntity<ResponseDto<?>> NewIndiaNewsApplicationExceptionHandler(Exception e,Throwable cause)
