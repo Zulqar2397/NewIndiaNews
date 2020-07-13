@@ -48,6 +48,10 @@ public class News {
 
 	@Column(name = "dateTime")
 	private Date dateTime;
+	
+	@Column(name = "hitCount")
+	@Value("0")
+	private int hitCount;
 
 	@ManyToOne
 	@JoinColumn(name = "adminEmail", nullable = false)
@@ -55,6 +59,9 @@ public class News {
 
 	@OneToMany(mappedBy = "news", cascade = CascadeType.ALL)
 	private List<Image> images;
+	
+	@OneToMany(mappedBy = "news",cascade = CascadeType.ALL)
+	private List<Comment> comments;
 
 	@ManyToOne
 	@JoinColumn(name = "categoryId", nullable = false)
@@ -65,7 +72,7 @@ public class News {
 	}
 
 	public News(int newsId, String title, String description, String region, String source, int likeCount,
-			Date dateTime, Admins admins, List<Image> images, Category category) {
+			Date dateTime, int hitCount, Admins admins, List<Image> images, List<Comment> comments, Category category) {
 		super();
 		this.newsId = newsId;
 		this.title = title;
@@ -74,8 +81,10 @@ public class News {
 		this.source = source;
 		this.likeCount = likeCount;
 		this.dateTime = dateTime;
+		this.hitCount = hitCount;
 		this.admins = admins;
 		this.images = images;
+		this.comments = comments;
 		this.category = category;
 	}
 
@@ -135,6 +144,14 @@ public class News {
 		this.dateTime = dateTime;
 	}
 
+	public int getHitCount() {
+		return hitCount;
+	}
+
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
+	}
+
 	public Admins getAdmins() {
 		return admins;
 	}
@@ -151,6 +168,14 @@ public class News {
 		this.images = images;
 	}
 
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -160,83 +185,13 @@ public class News {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((admins == null) ? 0 : admins.hashCode());
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((dateTime == null) ? 0 : dateTime.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((images == null) ? 0 : images.hashCode());
-		result = prime * result + likeCount;
-		result = prime * result + newsId;
-		result = prime * result + ((region == null) ? 0 : region.hashCode());
-		result = prime * result + ((source == null) ? 0 : source.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		News other = (News) obj;
-		if (admins == null) {
-			if (other.admins != null)
-				return false;
-		} else if (!admins.equals(other.admins))
-			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (dateTime == null) {
-			if (other.dateTime != null)
-				return false;
-		} else if (!dateTime.equals(other.dateTime))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (images == null) {
-			if (other.images != null)
-				return false;
-		} else if (!images.equals(other.images))
-			return false;
-		if (likeCount != other.likeCount)
-			return false;
-		if (newsId != other.newsId)
-			return false;
-		if (region == null) {
-			if (other.region != null)
-				return false;
-		} else if (!region.equals(other.region))
-			return false;
-		if (source == null) {
-			if (other.source != null)
-				return false;
-		} else if (!source.equals(other.source))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return "News [newsId=" + newsId + ", title=" + title + ", description=" + description + ", region=" + region
-				+ ", source=" + source + ", likeCount=" + likeCount + ", dateTime=" + dateTime + ", admins=" + admins
-				+ ", images=" + images + ", category=" + category + "]";
+				+ ", source=" + source + ", likeCount=" + likeCount + ", dateTime=" + dateTime + ", hitCount="
+				+ hitCount + ", admins=" + admins + ", images=" + images + ", comments=" + comments + ", category="
+				+ category + "]";
 	}
+	
+	
 
 }
