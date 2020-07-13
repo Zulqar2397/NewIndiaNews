@@ -26,7 +26,7 @@ public class News {
 	@NotNull
 	@Column(name = "newsId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int newsId;
+	private long newsId;
 
 	@NotNull
 	@Column(name = "title")
@@ -45,7 +45,7 @@ public class News {
 
 	@Column(name = "likeCount")
 	@Value("0")
-	private int likeCount;
+	private long likeCount;
 
 	@Column(name = "date")
 	private Date date;
@@ -55,7 +55,7 @@ public class News {
 	
 	@Column(name = "hitCount")
 	@Value("0")
-	private int hitCount;
+	private long hitCount;
 
 	@ManyToOne
 	@JoinColumn(name = "adminEmail", nullable = false)
@@ -76,8 +76,8 @@ public class News {
 		// TODO Auto-generated constructor stub
 	}
 
-	public News(int newsId, String title, String description, String region, String source, int likeCount,
-			Date date,Time time, int hitCount, Admins admins, List<Image> images, List<Comment> comments, Category category) {
+	public News(long newsId, String title, String description, String region, String source, long likeCount,
+			Date date,Time time, long hitCount, Admins admins, List<Image> images, List<Comment> comments, Category category) {
 		super();
 		this.newsId = newsId;
 		this.title = title;
@@ -94,11 +94,11 @@ public class News {
 		this.category = category;
 	}
 
-	public int getNewsId() {
+	public long getNewsId() {
 		return newsId;
 	}
 
-	public void setNewsId(int newsId) {
+	public void setNewsId(long newsId) {
 		this.newsId = newsId;
 	}
 
@@ -134,11 +134,11 @@ public class News {
 		this.source = source;
 	}
 
-	public int getLikeCount() {
+	public long getLikeCount() {
 		return likeCount;
 	}
 
-	public void setLikeCount(int likeCount) {
+	public void setLikeCount(long likeCount) {
 		this.likeCount = likeCount;
 	}
 
@@ -160,11 +160,11 @@ public class News {
 		this.time = time;
 	}
 
-	public int getHitCount() {
+	public long getHitCount() {
 		return hitCount;
 	}
 
-	public void setHitCount(int hitCount) {
+	public void setHitCount(long hitCount) {
 		this.hitCount = hitCount;
 	}
 

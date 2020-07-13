@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.newindianews.app.dto.NewsDto;
 import com.newindianews.app.entity.News;
+import com.newindianews.app.exception.DatabaseException;
 import com.newindianews.app.exception.ServiceException;
 import com.newindianews.app.repository.NewsRepository;
 import com.newindianews.app.service.NewsService;
@@ -18,6 +19,26 @@ public class NewsServiceImpl implements NewsService {
 NewsRepository newsRepo;
 	private ModelMapper modelMapper = new ModelMapper();
 
+	
+	
+	
+	private NewsDto convertNewsEntityToDto(News news)
+	{
+		return modelMapper.map(news, NewsDto.class);
+	}
+	
+	private News convertNewsDtoToEntity(NewsDto newsDto)
+	{
+		return modelMapper.map(newsDto, News.class);
+	}
+
+
+
+	@Override
+	public NewsDto getNewsById(long newsId) throws ServiceException {
+		// TODO Auto-generated method stub
+		return convertNewsEntityToDto(newsRepo.findById(newsId).get());
+	}
 	@Override
 	public List<NewsDto> getAllNews() throws ServiceException {
 		// TODO Auto-generated method stub
@@ -31,16 +52,19 @@ NewsRepository newsRepo;
 		}
 		return newsDtoList;
 	}
-	
-	
-	
-	private NewsDto convertNewsEntityToDto(News news)
-	{
-		return modelMapper.map(news, NewsDto.class);
+
+	@Override
+	public List<NewsDto> getNewsByRegion(String region) throws ServiceException, DatabaseException {
+		// TODO Auto-generated method stub
+		List<NewsDto> newsDtoList= new ArrayList<NewsDto>();
+		List<News> newsList = newsRepo.findAllByRegion(region);
+		for (News news : newsList) {
+			NewsDto newsDto = convertNewsEntityToDto(news);
+			newsDtoList.add(newsDto);
+		}
+		return newsDtoList;
 	}
 	
-	private News convertNewsDtoToEntity(NewsDto newsDto)
-	{
-		return modelMapper.map(newsDto, News.class);
-	}
+	
+	
 }

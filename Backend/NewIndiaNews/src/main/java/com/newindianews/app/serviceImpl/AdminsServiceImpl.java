@@ -1,5 +1,8 @@
 package com.newindianews.app.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import com.newindianews.app.dto.NewsDto;
 import com.newindianews.app.entity.Admins;
 import com.newindianews.app.entity.News;
 import com.newindianews.app.exception.AdminAlreadyExistsException;
+import com.newindianews.app.exception.DatabaseException;
 import com.newindianews.app.exception.NewsAlreadyExistsException;
 import com.newindianews.app.exception.ServiceException;
 import com.newindianews.app.repository.AdminsRepository;
@@ -24,7 +28,35 @@ public class AdminsServiceImpl implements AdminsService{
 	NewsRepository newsRepo;
 	
 	private ModelMapper modelMapper = new ModelMapper();
+	
+	
+	//The Model Conversion methods
+	
+	private AdminsDto convertAdminsEntityToDto(Admins admins)
+	{
+		return modelMapper.map(admins, AdminsDto.class);
+	}
+	
+	private Admins convertAdminsDtoToEntity(AdminsDto adminsDto)
+	{
+		return modelMapper.map(adminsDto, Admins.class);
+	}
+	
+	private NewsDto convertNewsEntityToDto(News news)
+	{
+		return modelMapper.map(news, NewsDto.class);
+	}
+	
+	private News convertNewsDtoToEntity(NewsDto newsDto)
+	{
+		return modelMapper.map(newsDto, News.class);
+	}
 
+	
+	
+	
+	
+	
 	@Override
 	public AdminsDto registerAdmin(AdminsDto adminsDto) throws ServiceException {
 		// TODO Auto-generated method stub
@@ -36,6 +68,8 @@ public class AdminsServiceImpl implements AdminsService{
 
 		return convertAdminsEntityToDto(adminsRepo.save(admins));
 	}
+	
+	
 	
 	@Override
 	public NewsDto addNews(NewsDto newsDto) throws ServiceException {
@@ -50,32 +84,23 @@ public class AdminsServiceImpl implements AdminsService{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	private AdminsDto convertAdminsEntityToDto(Admins admins)
-	{
-		return modelMapper.map(admins, AdminsDto.class);
-	}
-	
-	private Admins convertAdminsDtoToEntity(AdminsDto adminsDto)
-	{
-		return modelMapper.map(adminsDto, Admins.class);
-	}
-
-	private NewsDto convertNewsEntityToDto(News news)
-	{
-		return modelMapper.map(news, NewsDto.class);
-	}
-	
-	private News convertNewsDtoToEntity(NewsDto newsDto)
-	{
-		return modelMapper.map(newsDto, News.class);
+	@Override
+	public List<NewsDto> getNewsByAdmin(String adminEmail) throws ServiceException, DatabaseException {
+		// TODO Auto-generated method stub
+		List<NewsDto> newsDtoList = new ArrayList<NewsDto>();
+		
+		//try {
+			List<News> newsList= newsRepo.findAllByAdminsEmail(adminEmail);
+			for (News news : newsList) {
+				NewsDto newsDto = convertNewsEntityToDto(news);
+				newsDtoList.add(newsDto);
+			
+			}
+//		} catch (DatabaseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		return newsDtoList;
 	}
 
 

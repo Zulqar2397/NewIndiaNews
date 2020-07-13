@@ -17,7 +17,7 @@ public class Comment {
 @Id
 @Column(name = "commentId")
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private int commentId;
+private long commentId;
 
 @Column(name = "postedBy")
 private String postedBy;
@@ -36,7 +36,7 @@ public Comment() {
 	// TODO Auto-generated constructor stub
 }
 
-public Comment(int commentId, String postedBy, Date postedDate, String comment, News news) {
+public Comment(long commentId, String postedBy, Date postedDate, String comment, News news) {
 	super();
 	this.commentId = commentId;
 	this.postedBy = postedBy;
@@ -45,11 +45,11 @@ public Comment(int commentId, String postedBy, Date postedDate, String comment, 
 	this.news = news;
 }
 
-public int getCommentId() {
+public long getCommentId() {
 	return commentId;
 }
 
-public void setCommentId(int commentId) {
+public void setCommentId(long commentId) {
 	this.commentId = commentId;
 }
 

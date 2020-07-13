@@ -12,7 +12,7 @@ import com.newindianews.app.entity.Image;
 
 public class NewsDto {
 	
-	private int newsId;
+	private long newsId;
 
 	
 	private String title;
@@ -26,13 +26,13 @@ public class NewsDto {
 	private String source;
 
 	
-	private int likeCount;
+	private long likeCount;
 
 	private Date date;
 	
 	private Time time;
 	
-	private int hitCount;
+	private long hitCount;
 
 	
 	private AdminsDto admins;
@@ -50,8 +50,8 @@ public class NewsDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NewsDto(int newsId, String title, String description, String region, String source, int likeCount,
-			Date date,Time time, int hitCount, AdminsDto admins, List<Image> images, List<Comment> comments, CategoryDto category) {
+	public NewsDto(long newsId, String title, String description, String region, String source, long likeCount,
+			Date date,Time time, long hitCount, AdminsDto admins, List<Image> images, List<Comment> comments, CategoryDto category) {
 		super();
 		this.newsId = newsId;
 		this.title = title;
@@ -68,11 +68,11 @@ public class NewsDto {
 		this.category = category;
 	}
 
-	public int getNewsId() {
+	public long getNewsId() {
 		return newsId;
 	}
 
-	public void setNewsId(int newsId) {
+	public void setNewsId(long newsId) {
 		this.newsId = newsId;
 	}
 
@@ -108,11 +108,11 @@ public class NewsDto {
 		this.source = source;
 	}
 
-	public int getLikeCount() {
+	public long getLikeCount() {
 		return likeCount;
 	}
 
-	public void setLikeCount(int likeCount) {
+	public void setLikeCount(long likeCount) {
 		this.likeCount = likeCount;
 	}
 
@@ -133,11 +133,11 @@ public class NewsDto {
 		this.time = time;
 	}
 
-	public int getHitCount() {
+	public long getHitCount() {
 		return hitCount;
 	}
 
-	public void setHitCount(int hitCount) {
+	public void setHitCount(long hitCount) {
 		this.hitCount = hitCount;
 	}
 

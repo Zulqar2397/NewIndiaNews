@@ -18,7 +18,7 @@ public class Image {
 	@NotNull
 	@Column(name = "imageId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int imageId;
+	private long imageId;
 	
 	@NotNull
 	@Column(name = "imageUrl")
@@ -32,18 +32,18 @@ public class Image {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Image(int imageId, String imageUrl, News news) {
+	public Image(long imageId, String imageUrl, News news) {
 		super();
 		this.imageId = imageId;
 		this.imageUrl = imageUrl;
 		this.news = news;
 	}
 
-	public int getImageId() {
+	public long getImageId() {
 		return imageId;
 	}
 
-	public void setImageId(int imageId) {
+	public void setImageId(long imageId) {
 		this.imageId = imageId;
 	}
 
@@ -63,15 +63,7 @@ public class Image {
 		this.news = news;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + imageId;
-		result = prime * result + ((imageUrl == null) ? 0 : imageUrl.hashCode());
-		result = prime * result + ((news == null) ? 0 : news.hashCode());
-		return result;
-	}
+
 
 	@Override
 	public boolean equals(Object obj) {

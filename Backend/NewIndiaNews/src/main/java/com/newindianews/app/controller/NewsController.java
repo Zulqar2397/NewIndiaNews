@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +22,34 @@ public class NewsController {
 @Autowired
 NewsService newsService;
 
+
+
 @GetMapping("/getAllNews")
 public ResponseEntity<ResponseDto<List<NewsDto>>> getAllNews() throws AppException
 {
 	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getAllNews(),null,"Assigned",true));
 }
-	
+
+
+
+@GetMapping("/getNewsById/{newsId}")
+public ResponseEntity<ResponseDto<NewsDto>> getNewsById(@PathVariable long newsId) throws AppException
+{
+
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<NewsDto>(newsService.getNewsById(newsId),null,"Data Retrieved",true));	
+
+}
+
+
+
+@GetMapping("/getNewsByRegion/{region}")
+public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByRegion(@PathVariable String region) throws AppException
+{
+
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getNewsByRegion(region),null,"Data Retrieved",true));
+
+}
+
+
+
 }

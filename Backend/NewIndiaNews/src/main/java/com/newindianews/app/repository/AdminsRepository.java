@@ -8,4 +8,5 @@ import com.newindianews.app.entity.Admins;
 @Repository
 public interface AdminsRepository extends JpaRepository<Admins, String> {
 
+
 }
