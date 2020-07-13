@@ -14,4 +14,5 @@ public interface NewsRepository extends JpaRepository<News,Long> {
 
 public List<News> findAllByAdminsEmail(String adminEmail) throws DatabaseException;
 public List<News> findAllByRegion(String region) throws DatabaseException;
+public List<News> findAllByCategoryCategoryName(String category)throws DatabaseException;
 }

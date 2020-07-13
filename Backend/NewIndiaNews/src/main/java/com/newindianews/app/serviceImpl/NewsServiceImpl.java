@@ -67,4 +67,17 @@ NewsRepository newsRepo;
 	
 	
 	
+	@Override
+	public List<NewsDto> getNewsByCategory(String category) throws ServiceException, DatabaseException {
+		// TODO Auto-generated method stub
+		List<NewsDto> newsDtoList= new ArrayList<NewsDto>();
+		List<News> newsList = newsRepo.findAllByCategoryCategoryName(category);
+		for (News news : newsList) {
+			NewsDto newsDto = convertNewsEntityToDto(news);
+			newsDtoList.add(newsDto);
+		}
+		return newsDtoList;
+	}
+	
+	
 }

@@ -14,5 +14,7 @@ public interface NewsService {
 
 	List<NewsDto> getNewsByRegion(String region) throws ServiceException, DatabaseException;
 
+	List<NewsDto> getNewsByCategory(String category) throws ServiceException, DatabaseException;
+
 
 }

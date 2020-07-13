@@ -52,4 +52,14 @@ public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByRegion(@PathVariable 
 
 
 
+@GetMapping("/getNewsByCategory/{category}")
+public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByCategory(@PathVariable String category) throws AppException
+{
+
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getNewsByCategory(category),null,"Data Retrieved",true));
+
+}
+
+
+
 }
