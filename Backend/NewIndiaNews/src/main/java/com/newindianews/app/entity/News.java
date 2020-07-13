@@ -1,6 +1,7 @@
 package com.newindianews.app.entity;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -46,8 +47,11 @@ public class News {
 	@Value("0")
 	private int likeCount;
 
-	@Column(name = "dateTime")
-	private Date dateTime;
+	@Column(name = "date")
+	private Date date;
+	
+	@Column(name="time")
+	private Time time;
 	
 	@Column(name = "hitCount")
 	@Value("0")
@@ -67,12 +71,13 @@ public class News {
 	@JoinColumn(name = "categoryId", nullable = false)
 	private Category category;
 
+
 	public News() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public News(int newsId, String title, String description, String region, String source, int likeCount,
-			Date dateTime, int hitCount, Admins admins, List<Image> images, List<Comment> comments, Category category) {
+			Date date,Time time, int hitCount, Admins admins, List<Image> images, List<Comment> comments, Category category) {
 		super();
 		this.newsId = newsId;
 		this.title = title;
@@ -80,7 +85,8 @@ public class News {
 		this.region = region;
 		this.source = source;
 		this.likeCount = likeCount;
-		this.dateTime = dateTime;
+		this.date = date;
+		this.time= time;
 		this.hitCount = hitCount;
 		this.admins = admins;
 		this.images = images;
@@ -136,12 +142,22 @@ public class News {
 		this.likeCount = likeCount;
 	}
 
-	public Date getDateTime() {
-		return dateTime;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	
+
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
 	}
 
 	public int getHitCount() {
@@ -187,10 +203,12 @@ public class News {
 	@Override
 	public String toString() {
 		return "News [newsId=" + newsId + ", title=" + title + ", description=" + description + ", region=" + region
-				+ ", source=" + source + ", likeCount=" + likeCount + ", dateTime=" + dateTime + ", hitCount="
-				+ hitCount + ", admins=" + admins + ", images=" + images + ", comments=" + comments + ", category="
-				+ category + "]";
+				+ ", source=" + source + ", likeCount=" + likeCount + ", date=" + date + ", time=" + time
+				+ ", hitCount=" + hitCount + ", admins=" + admins + ", images=" + images + ", comments=" + comments
+				+ ", category=" + category + "]";
 	}
+
+	
 	
 	
 

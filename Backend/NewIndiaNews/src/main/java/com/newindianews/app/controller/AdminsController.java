@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.newindianews.app.dto.AdminsDto;
+import com.newindianews.app.dto.NewsDto;
 import com.newindianews.app.dto.ResponseDto;
 import com.newindianews.app.exception.AppException;
 import com.newindianews.app.service.AdminsService;
@@ -26,5 +27,11 @@ public class AdminsController {
 	{
 		
 		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<AdminsDto>(adminsService.registerAdmin(adminsDto),null,"Assigned",true));
+	}
+	
+	@PostMapping("/addNews")
+	public ResponseEntity<ResponseDto<NewsDto>> addNews(@RequestBody NewsDto newsDto) throws AppException
+	{
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<NewsDto>(adminsService.addNews(newsDto),null,"Assigned",true));
 	}
 }
