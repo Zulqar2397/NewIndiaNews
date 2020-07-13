@@ -3,6 +3,7 @@ package com.newindianews.app.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.newindianews.app.entity.News;
 
 public class AdminsDto {
@@ -18,15 +19,15 @@ public class AdminsDto {
 	
 	private boolean approval;
 
-	@JsonIgnore
-	private List<News> newsList;
+
+	private List<NewsDto> newsList;
 
 public AdminsDto() {
 	// TODO Auto-generated constructor stub
 }
 
 public AdminsDto(String email, String firstName, String lastName, String password, boolean approval,
-		List<News> newsList) {
+		List<NewsDto> newsList) {
 	super();
 	this.email = email;
 	this.firstName = firstName;
@@ -75,12 +76,12 @@ public boolean isApproval() {
 public void setApproval(boolean approval) {
 	this.approval = approval;
 }
-
-public List<News> getNewsList() {
+@JsonIgnore
+public List<NewsDto> getNewsList() {
 	return newsList;
 }
 
-public void setNewsList(List<News> newsList) {
+public void setNewsList(List<NewsDto> newsList) {
 	this.newsList = newsList;
 }
 

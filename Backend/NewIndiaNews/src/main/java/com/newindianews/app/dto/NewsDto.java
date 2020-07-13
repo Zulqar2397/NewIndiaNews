@@ -35,7 +35,7 @@ public class NewsDto {
 	private int hitCount;
 
 	
-	private Admins admins;
+	private AdminsDto admins;
 
     @JsonIgnore
 	private List<Image> images;
@@ -44,14 +44,14 @@ public class NewsDto {
     private List<Comment> comments;
 
 	
-	private Category category;
+	private CategoryDto category;
 
 	public NewsDto() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public NewsDto(int newsId, String title, String description, String region, String source, int likeCount,
-			Date date,Time time, int hitCount, Admins admins, List<Image> images, List<Comment> comments, Category category) {
+			Date date,Time time, int hitCount, AdminsDto admins, List<Image> images, List<Comment> comments, CategoryDto category) {
 		super();
 		this.newsId = newsId;
 		this.title = title;
@@ -141,11 +141,11 @@ public class NewsDto {
 		this.hitCount = hitCount;
 	}
 
-	public Admins getAdmins() {
+	public AdminsDto getAdmins() {
 		return admins;
 	}
 
-	public void setAdmins(Admins admins) {
+	public void setAdmins(AdminsDto admins) {
 		this.admins = admins;
 	}
 
@@ -165,11 +165,11 @@ public class NewsDto {
 		this.comments = comments;
 	}
 
-	public Category getCategory() {
+	public CategoryDto getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(CategoryDto category) {
 		this.category = category;
 	}
 
