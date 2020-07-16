@@ -36,9 +36,21 @@ NewsRepository newsRepo;
 
 	@Override
 	public NewsDto getNewsById(long newsId) throws ServiceException {
+		
 		// TODO Auto-generated method stub
-		return convertNewsEntityToDto(newsRepo.findById(newsId).get());
+		NewsDto newsDto = convertNewsEntityToDto(newsRepo.findById(newsId).get());
+		long hitCount;
+		hitCount = newsDto.getHitCount();
+		hitCount = hitCount + 1;
+		newsDto.setHitCount(hitCount);
+		
+		return convertNewsEntityToDto(newsRepo.save(convertNewsDtoToEntity(newsDto)));
+		
+	//	return convertNewsEntityToDto(newsRepo.findById(newsId).get());
 	}
+	
+	
+	
 	@Override
 	public List<NewsDto> getAllNews() throws ServiceException {
 		// TODO Auto-generated method stub
@@ -77,6 +89,32 @@ NewsRepository newsRepo;
 			newsDtoList.add(newsDto);
 		}
 		return newsDtoList;
+	}
+
+	@Override
+	public List<NewsDto> getNewsByHeader(String header) throws ServiceException, DatabaseException {
+		// TODO Auto-generated method stub
+		List<NewsDto> newsDtoList= new ArrayList<NewsDto>();
+		List<News> newsList = newsRepo.findByHeader(header);
+		for (News news : newsList) {
+			NewsDto newsDto = convertNewsEntityToDto(news);
+			newsDtoList.add(newsDto);
+		}
+		
+
+		return newsDtoList;
+	}
+
+	@Override
+	public NewsDto likeNews(long newsId) throws ServiceException {
+		// TODO Auto-generated method stub
+		NewsDto newsDto = convertNewsEntityToDto(newsRepo.findById(newsId).get());
+		long likeCount;
+		likeCount = newsDto.getLikeCount();
+		likeCount = likeCount + 1;
+		newsDto.setLikeCount(likeCount);
+		
+	return convertNewsEntityToDto(newsRepo.save(convertNewsDtoToEntity(newsDto)));
 	}
 	
 	

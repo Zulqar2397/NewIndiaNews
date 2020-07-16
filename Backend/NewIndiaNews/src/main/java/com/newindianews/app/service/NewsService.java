@@ -16,5 +16,9 @@ public interface NewsService {
 
 	List<NewsDto> getNewsByCategory(String category) throws ServiceException, DatabaseException;
 
+	List<NewsDto> getNewsByHeader(String header)throws ServiceException, DatabaseException;
+
+	NewsDto likeNews(long newsId)throws ServiceException;
+
 
 }
