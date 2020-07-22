@@ -124,22 +124,23 @@ public class AdminsServiceImpl implements AdminsService{
 	
 	
 	@Override
-	public List<NewsDto> getNewsByAdmin(String adminEmail) throws ServiceException, DatabaseException {
+	public List<News> getNewsByAdmin(String adminEmail) throws ServiceException, DatabaseException {
 		// TODO Auto-generated method stub
 		List<NewsDto> newsDtoList = new ArrayList<NewsDto>();
 		
 		//try {
 			List<News> newsList= newsRepo.findAllByAdminsEmail(adminEmail);
-			for (News news : newsList) {
-				NewsDto newsDto = convertNewsEntityToDto(news);
-				newsDtoList.add(newsDto);
-			
-			}
-//		} catch (DatabaseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		return newsDtoList;
+//			for (News news : newsList) {
+//				NewsDto newsDto = convertNewsEntityToDto(news);
+//				newsDtoList.add(newsDto);
+//			
+//			}
+////		} catch (DatabaseException e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
+//		return newsDtoList;
+			return newsList;
 	}
 
 

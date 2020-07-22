@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.newindianews.app.dto.AdminsDto;
 import com.newindianews.app.dto.NewsDto;
 import com.newindianews.app.dto.ResponseDto;
+import com.newindianews.app.entity.News;
 import com.newindianews.app.exception.AppException;
 import com.newindianews.app.service.AdminsService;
 
@@ -40,8 +41,8 @@ public class AdminsController {
 	}
 	
 	@GetMapping("/getNewsByAdmin/{adminEmail}")
-	public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByAdmin(@PathVariable String adminEmail ) throws AppException
+	public ResponseEntity<ResponseDto<List<News>>> getNewsByAdmin(@PathVariable String adminEmail ) throws AppException
 	{
-		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(adminsService.getNewsByAdmin(adminEmail),null,"Retrieved Data",true));
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<News>>(adminsService.getNewsByAdmin(adminEmail),null,"Retrieved Data",true));
 	}
 }

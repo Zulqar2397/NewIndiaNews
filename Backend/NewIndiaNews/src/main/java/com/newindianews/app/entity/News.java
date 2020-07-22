@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -61,16 +62,22 @@ public class News {
 
 	@ManyToOne
 	@JoinColumn(name = "adminEmail", nullable = false)
+	@JsonIgnoreProperties("newsList")
 	private Admins admins;
 
 	@OneToMany(mappedBy = "news", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("news")
+
 	private List<Image> images;
 	
 	@OneToMany(mappedBy = "news",cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("news")
+
 	private List<Comment> comments;
 
 	@ManyToOne
 	@JoinColumn(name = "categoryId", nullable = false)
+	@JsonIgnoreProperties("news")
 	private Category category;
 
 

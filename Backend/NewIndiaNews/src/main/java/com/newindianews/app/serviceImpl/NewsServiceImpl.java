@@ -35,86 +35,93 @@ NewsRepository newsRepo;
 
 
 	@Override
-	public NewsDto getNewsById(long newsId) throws ServiceException {
+	public News getNewsById(long newsId) throws ServiceException {
 		
 		// TODO Auto-generated method stub
-		NewsDto newsDto = convertNewsEntityToDto(newsRepo.findById(newsId).get());
+		//NewsDto newsDto = convertNewsEntityToDto(newsRepo.findById(newsId).get());
+		News newsDto = newsRepo.findById(newsId).get();
 		long hitCount;
 		hitCount = newsDto.getHitCount();
 		hitCount = hitCount + 1;
 		newsDto.setHitCount(hitCount);
 		
-		return convertNewsEntityToDto(newsRepo.save(convertNewsDtoToEntity(newsDto)));
-		
+	//	return convertNewsEntityToDto(newsRepo.save(convertNewsDtoToEntity(newsDto)));
+		return newsDto;
 	//	return convertNewsEntityToDto(newsRepo.findById(newsId).get());
 	}
 	
 	
 	
 	@Override
-	public List<NewsDto> getAllNews() throws ServiceException {
+	public List<News> getAllNews() throws ServiceException {
 		// TODO Auto-generated method stub
 		List<News> newsList = newsRepo.findAll();
-		List<NewsDto> newsDtoList = new ArrayList<NewsDto>();
-		for (News news : newsList) {
-			
-			NewsDto newsDto = convertNewsEntityToDto(news);
-			newsDtoList.add(newsDto);
-			
-		}
-		return newsDtoList;
+//		List<NewsDto> newsDtoList = new ArrayList<NewsDto>();
+//		for (News news : newsList) {
+//			
+//			NewsDto newsDto = convertNewsEntityToDto(news);
+//			newsDtoList.add(newsDto);
+//			
+//		}
+//		return newsDtoList;
+		return newsList;
 	}
 
 	@Override
-	public List<NewsDto> getNewsByRegion(String region) throws ServiceException, DatabaseException {
+	public List<News> getNewsByRegion(String region) throws ServiceException, DatabaseException {
 		// TODO Auto-generated method stub
 		List<NewsDto> newsDtoList= new ArrayList<NewsDto>();
 		List<News> newsList = newsRepo.findAllByRegion(region);
-		for (News news : newsList) {
-			NewsDto newsDto = convertNewsEntityToDto(news);
-			newsDtoList.add(newsDto);
-		}
-		return newsDtoList;
+//		for (News news : newsList) {
+//			NewsDto newsDto = convertNewsEntityToDto(news);
+//			newsDtoList.add(newsDto);
+//		}
+//		return newsDtoList;
+		return newsList;
 	}
 	
 	
 	
 	@Override
-	public List<NewsDto> getNewsByCategory(String category) throws ServiceException, DatabaseException {
+	public List<News> getNewsByCategory(String category) throws ServiceException, DatabaseException {
 		// TODO Auto-generated method stub
 		List<NewsDto> newsDtoList= new ArrayList<NewsDto>();
 		List<News> newsList = newsRepo.findAllByCategoryCategoryName(category);
-		for (News news : newsList) {
-			NewsDto newsDto = convertNewsEntityToDto(news);
-			newsDtoList.add(newsDto);
-		}
-		return newsDtoList;
+//		for (News news : newsList) {
+//			NewsDto newsDto = convertNewsEntityToDto(news);
+//			newsDtoList.add(newsDto);
+//		}
+		//return newsDtoList;
+	return newsList;
 	}
 
 	@Override
-	public List<NewsDto> getNewsByHeader(String header) throws ServiceException, DatabaseException {
+	public List<News> getNewsByHeader(String header) throws ServiceException, DatabaseException {
 		// TODO Auto-generated method stub
 		List<NewsDto> newsDtoList= new ArrayList<NewsDto>();
 		List<News> newsList = newsRepo.findByHeader(header);
-		for (News news : newsList) {
-			NewsDto newsDto = convertNewsEntityToDto(news);
-			newsDtoList.add(newsDto);
-		}
-		
-
-		return newsDtoList;
+//		for (News news : newsList) {
+//			NewsDto newsDto = convertNewsEntityToDto(news);
+//			newsDtoList.add(newsDto);
+//		}
+//		
+//
+//		return newsDtoList;
+		return newsList;
 	}
 
 	@Override
-	public NewsDto likeNews(long newsId) throws ServiceException {
+	public News likeNews(long newsId) throws ServiceException {
 		// TODO Auto-generated method stub
-		NewsDto newsDto = convertNewsEntityToDto(newsRepo.findById(newsId).get());
+		//NewsDto newsDto = convertNewsEntityToDto(newsRepo.findById(newsId).get());
+		News newsDto = newsRepo.findById(newsId).get();
 		long likeCount;
 		likeCount = newsDto.getLikeCount();
 		likeCount = likeCount + 1;
 		newsDto.setLikeCount(likeCount);
 		
-	return convertNewsEntityToDto(newsRepo.save(convertNewsDtoToEntity(newsDto)));
+	//return convertNewsEntityToDto(newsRepo.save(convertNewsDtoToEntity(newsDto)));
+	return newsDto;
 	}
 	
 	

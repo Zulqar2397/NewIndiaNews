@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.newindianews.app.dto.AdminsDto;
 import com.newindianews.app.dto.NewsDto;
+import com.newindianews.app.entity.News;
 import com.newindianews.app.exception.DatabaseException;
 import com.newindianews.app.exception.ServiceException;
 
@@ -13,6 +14,6 @@ public interface AdminsService {
 
 	NewsDto addNews(NewsDto newsDto) throws ServiceException;
 
-	List<NewsDto> getNewsByAdmin(String adminEmail) throws ServiceException, DatabaseException;
+	List<News> getNewsByAdmin(String adminEmail) throws ServiceException, DatabaseException;
 
 }

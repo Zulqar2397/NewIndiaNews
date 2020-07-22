@@ -3,22 +3,23 @@ package com.newindianews.app.service;
 import java.util.List;
 
 import com.newindianews.app.dto.NewsDto;
+import com.newindianews.app.entity.News;
 import com.newindianews.app.exception.DatabaseException;
 import com.newindianews.app.exception.ServiceException;
 
 public interface NewsService {
 
-	List<NewsDto> getAllNews() throws ServiceException;
+	List<News> getAllNews() throws ServiceException;
 
-	NewsDto getNewsById(long newsId) throws ServiceException;
+	News getNewsById(long newsId) throws ServiceException;
 
-	List<NewsDto> getNewsByRegion(String region) throws ServiceException, DatabaseException;
+	List<News> getNewsByRegion(String region) throws ServiceException, DatabaseException;
 
-	List<NewsDto> getNewsByCategory(String category) throws ServiceException, DatabaseException;
+	List<News> getNewsByCategory(String category) throws ServiceException, DatabaseException;
 
-	List<NewsDto> getNewsByHeader(String header)throws ServiceException, DatabaseException;
+	List<News> getNewsByHeader(String header)throws ServiceException, DatabaseException;
 
-	NewsDto likeNews(long newsId)throws ServiceException;
+	News likeNews(long newsId)throws ServiceException;
 
 
 }

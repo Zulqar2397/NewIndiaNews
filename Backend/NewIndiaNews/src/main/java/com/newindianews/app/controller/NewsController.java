@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.newindianews.app.dto.NewsDto;
 import com.newindianews.app.dto.ResponseDto;
+import com.newindianews.app.entity.News;
 import com.newindianews.app.exception.AppException;
 import com.newindianews.app.repository.NewsRepository;
 import com.newindianews.app.service.NewsService;
@@ -27,57 +28,57 @@ NewsService newsService;
 
 
 @GetMapping("/getAllNews")
-public ResponseEntity<ResponseDto<List<NewsDto>>> getAllNews() throws AppException
+public ResponseEntity<ResponseDto<List<News>>> getAllNews() throws AppException
 {
-	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getAllNews(),null,"Assigned",true));
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<News>>(newsService.getAllNews(),null,"Assigned",true));
 }
 
 
 
 @GetMapping("/getNewsById/{newsId}")
-public ResponseEntity<ResponseDto<NewsDto>> getNewsById(@PathVariable long newsId) throws AppException
+public ResponseEntity<ResponseDto<News>> getNewsById(@PathVariable long newsId) throws AppException
 {
 
-	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<NewsDto>(newsService.getNewsById(newsId),null,"Data Retrieved",true));	
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<News>(newsService.getNewsById(newsId),null,"Data Retrieved",true));	
 
 }
 
 
 
 @GetMapping("/getNewsByRegion/{region}")
-public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByRegion(@PathVariable String region) throws AppException
+public ResponseEntity<ResponseDto<List<News>>> getNewsByRegion(@PathVariable String region) throws AppException
 {
 
-	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getNewsByRegion(region),null,"Data Retrieved",true));
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<News>>(newsService.getNewsByRegion(region),null,"Data Retrieved",true));
 
 }
 
 
 
 @GetMapping("/getNewsByCategory/{category}")
-public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByCategory(@PathVariable String category) throws AppException
+public ResponseEntity<ResponseDto<List<News>>> getNewsByCategory(@PathVariable String category) throws AppException
 {
 
-	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getNewsByCategory(category),null,"Data Retrieved",true));
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<News>>(newsService.getNewsByCategory(category),null,"Data Retrieved",true));
 
 }
 
 
 
 @GetMapping("/getNewsByHeading/{header}")
-public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByHeading(@PathVariable String header) throws AppException
+public ResponseEntity<ResponseDto<List<News>>> getNewsByHeading(@PathVariable String header) throws AppException
 {
 
-	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getNewsByHeader(header),null,"Data Retrieved",true));
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<News>>(newsService.getNewsByHeader(header),null,"Data Retrieved",true));
 }
 
 
 //Put Mapping
 @PostMapping("/{newsId}/like")
-public ResponseEntity<ResponseDto<NewsDto>> likeNews(@PathVariable long newsId) throws AppException
+public ResponseEntity<ResponseDto<News>> likeNews(@PathVariable long newsId) throws AppException
 {
 
-	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<NewsDto>(newsService.likeNews(newsId),null,"Assigned",true));
+	return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<News>(newsService.likeNews(newsId),null,"Assigned",true));
 	
 }
 
