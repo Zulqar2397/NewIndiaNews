@@ -29,7 +29,7 @@ private Date postedDate;
 private String comment;
 
 @ManyToOne
-@JoinColumn(name = "newsId", nullable = false)
+@JoinColumn(name = "newsId",nullable = true)
 private News news;
 
 public Comment() {

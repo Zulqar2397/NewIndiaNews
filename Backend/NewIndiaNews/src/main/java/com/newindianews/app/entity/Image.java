@@ -25,7 +25,7 @@ public class Image {
 	private String imageUrl;
 	
 	@ManyToOne
-	@JoinColumn(name = "newsId", nullable = false)
+	@JoinColumn(name = "newsId",nullable=true)
 	private News news;
 	
 	public Image() {

@@ -12,7 +12,7 @@ public class CategoryDto {
 	
 	private String categoryName;
 
-	@JsonIgnore
+//	@JsonIgnore
 	private List<News> news;
 	
 	public CategoryDto() {
@@ -41,7 +41,8 @@ public class CategoryDto {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
+	
+	@JsonIgnore
 	public List<News> getNews() {
 		return news;
 	}

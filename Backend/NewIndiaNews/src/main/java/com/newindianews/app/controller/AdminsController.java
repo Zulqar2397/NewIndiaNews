@@ -5,7 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.newindianews.app.dto.AdminsDto;
 import com.newindianews.app.dto.NewsDto;
@@ -15,26 +20,19 @@ import com.newindianews.app.service.AdminsService;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin
+
 public class AdminsController {
 
 	@Autowired
 	AdminsService adminsService;
 	
 	@PostMapping("/registerAdmin")
-	public ResponseEntity<ResponseDto<Boolean>> registerAdmin(@RequestBody AdminsDto adminsDto) throws AppException
+	public ResponseEntity<ResponseDto<AdminsDto>> registerAdmin(@RequestBody AdminsDto adminsDto) throws AppException
 	{
 		
-		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<Boolean>(adminsService.registerAdmin(adminsDto),null,"Assigned",true));
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<AdminsDto>(adminsService.registerAdmin(adminsDto),null,"Assigned",true));
 	}
-
-	@GetMapping("/login/{email}/{password}")
-    ResponseEntity<ResponseDto> adminLogin(@PathVariable String email,@PathVariable String password) throws AppException
-    {
-
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<>(adminsService.adminLogin(email,password),null,"Logged in Successfully",true));
-    }
-
+	
 	@PostMapping("/addNews")
 	public ResponseEntity<ResponseDto<NewsDto>> addNews(@RequestBody NewsDto newsDto) throws AppException
 	{

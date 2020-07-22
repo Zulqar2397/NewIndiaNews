@@ -19,7 +19,7 @@ public class AdminsDto {
 	
 	private boolean approval;
 
-
+@JsonIgnoreProperties("admins")
 	private List<NewsDto> newsList;
 
 public AdminsDto() {
@@ -76,7 +76,6 @@ public boolean isApproval() {
 public void setApproval(boolean approval) {
 	this.approval = approval;
 }
-@JsonIgnore
 public List<NewsDto> getNewsList() {
 	return newsList;
 }

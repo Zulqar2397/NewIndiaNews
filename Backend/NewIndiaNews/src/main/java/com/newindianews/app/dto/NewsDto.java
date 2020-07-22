@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.newindianews.app.entity.Admins;
 import com.newindianews.app.entity.Category;
 import com.newindianews.app.entity.Comment;
@@ -37,11 +38,11 @@ public class NewsDto {
 	
 	private AdminsDto admins;
 
-    @JsonIgnore
-	private List<Image> images;
+   @JsonIgnoreProperties("news")
+	private List<ImageDto> images;
 	
-    @JsonIgnore
-    private List<Comment> comments;
+   @JsonIgnoreProperties("news")
+    private List<CommentDto> comments;
 
 	
 	private CategoryDto category;
@@ -51,7 +52,7 @@ public class NewsDto {
 	}
 
 	public NewsDto(long newsId, String title, String description, String region, String source, long likeCount,
-			Date date,Time time, long hitCount, AdminsDto admins, List<Image> images, List<Comment> comments, CategoryDto category) {
+			Date date,Time time, long hitCount, AdminsDto admins, List<ImageDto> images, List<CommentDto> comments, CategoryDto category) {
 		super();
 		this.newsId = newsId;
 		this.title = title;
@@ -149,19 +150,20 @@ public class NewsDto {
 		this.admins = admins;
 	}
 
-	public List<Image> getImages() {
+	
+	public List<ImageDto> getImages() {
 		return images;
 	}
 
-	public void setImages(List<Image> images) {
+	public void setImages(List<ImageDto> images) {
 		this.images = images;
 	}
-
-	public List<Comment> getComments() {
+	
+	public List<CommentDto> getComments() {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
+	public void setComments(List<CommentDto> comments) {
 		this.comments = comments;
 	}
 
