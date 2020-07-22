@@ -9,8 +9,11 @@ import com.newindianews.app.exception.DatabaseException;
 import com.newindianews.app.exception.ServiceException;
 
 public interface AdminsService {
+	String passwordEncryptor(String password);
 
-	AdminsDto registerAdmin(AdminsDto adminsDto) throws ServiceException;
+	boolean adminLogin(String email,String password) throws ServiceException;
+
+	boolean registerAdmin(AdminsDto adminsDto) throws ServiceException;
 
 	NewsDto addNews(NewsDto newsDto) throws ServiceException;
 
