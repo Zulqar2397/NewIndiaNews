@@ -154,7 +154,6 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public CommentDto postComment(long newsId, CommentDto commentDto) {
-        List<CommentDto> comments = new ArrayList<CommentDto>();
         News news = newsRepo.getOne(newsId);
         Comment comment = new Comment();
         comment.setPostedBy(commentDto.getPostedBy());
