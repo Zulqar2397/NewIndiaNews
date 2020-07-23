@@ -1,10 +1,8 @@
 package com.newindianews.app.dto;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.newindianews.app.entity.News;
+
+import java.util.List;
 
 public class AdminsDto {
     private String email;
@@ -13,22 +11,23 @@ public class AdminsDto {
 
     private String lastName;
 
+    private String password;
+
     private boolean approval;
 
     @JsonIgnoreProperties("admins")
     private List<NewsDto> newsList;
 
-    public AdminsDto() {
-        // TODO Auto-generated constructor stub
-    }
-
-    public AdminsDto(String email, String firstName, String lastName,
-                     List<NewsDto> newsList) {
-        super();
+    public AdminsDto(String email, String firstName, String lastName, String password, boolean approval, List<NewsDto> newsList) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
+        this.approval = approval;
         this.newsList = newsList;
+    }
+
+    public AdminsDto() {
     }
 
     public String getEmail() {
@@ -55,6 +54,14 @@ public class AdminsDto {
         this.lastName = lastName;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public boolean isApproval() {
         return approval;
     }
@@ -70,6 +77,4 @@ public class AdminsDto {
     public void setNewsList(List<NewsDto> newsList) {
         this.newsList = newsList;
     }
-
-
 }

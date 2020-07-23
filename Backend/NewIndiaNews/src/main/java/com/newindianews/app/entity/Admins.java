@@ -17,151 +17,152 @@ import com.sun.istack.NotNull;
 @Table(name = "admins")
 public class Admins {
 
-	@Id
-	@NotNull
-	@Column(name = "email")
-	private String email;
+    @Id
+    @NotNull
+    @Column(name = "email")
+    private String email;
 
-	@NotNull
-	@Column(name = "firstName")
-	private String firstName;
+    @NotNull
+    @Column(name = "firstName")
+    private String firstName;
 
-	@NotNull
-	@Column(name = "lastName")
-	private String lastName;
+    @NotNull
+    @Column(name = "lastName")
+    private String lastName;
 
-	@NotNull
-	@Column(name = "password")
-	private String password;
-	
-	@NotNull
-	@Column(name = "approval")
-	@Value("false")
-	private boolean approval;
+    @NotNull
+    @Column(name = "password")
+    private String password;
 
-	@OneToMany(mappedBy = "admins", cascade = CascadeType.PERSIST)
-	private List<News> newsList;
+    @NotNull
+    @Column(name = "approval")
+    @Value("false")
+    private boolean approval;
 
-	public Admins() {
-		// TODO Auto-generated constructor stub
-	}
+    @OneToMany(mappedBy = "admins", cascade = CascadeType.PERSIST)
+    private List<News> newsList;
 
-	public Admins(String email, String firstName, String lastName, String password, boolean approval,
-			List<News> newsList) {
-		super();
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.approval = approval;
-		this.newsList = newsList;
-	}
+    public Admins() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public Admins(String email, String firstName, String lastName, String password, boolean approval,
+                  List<News> newsList) {
+        super();
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.approval = approval;
+        this.newsList = newsList;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public boolean isApproval() {
-		return approval;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setApproval(boolean approval) {
-		this.approval = approval;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public List<News> getNewsList() {
-		return newsList;
-	}
+    public boolean isApproval() {
+        return approval;
+    }
 
-	public void setNewsList(List<News> newsList) {
-		this.newsList = newsList;
-	}
+    public void setApproval(boolean approval) {
+        this.approval = approval;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (approval ? 1231 : 1237);
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((newsList == null) ? 0 : newsList.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
-	}
+    public List<News> getNewsList() {
+        return newsList;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Admins other = (Admins) obj;
-		if (approval != other.approval)
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (newsList == null) {
-			if (other.newsList != null)
-				return false;
-		} else if (!newsList.equals(other.newsList))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
-	}
+    public void setNewsList(List<News> newsList) {
+        this.newsList = newsList;
+    }
 
-	@Override
-	public String toString() {
-		return "Admins [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+ password + ", approval=" + approval + ", newsList=" + newsList + "]";
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (approval ? 1231 : 1237);
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((newsList == null) ? 0 : newsList.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        return result;
+    }
 
-	
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Admins other = (Admins) obj;
+        if (approval != other.approval)
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        if (firstName == null) {
+            if (other.firstName != null)
+                return false;
+        } else if (!firstName.equals(other.firstName))
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (newsList == null) {
+            if (other.newsList != null)
+                return false;
+        } else if (!newsList.equals(other.newsList))
+            return false;
+        if (password == null) {
+            if (other.password != null)
+                return false;
+        } else if (!password.equals(other.password))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Admins [email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
+                + password + ", approval=" + approval + ", newsList=" + newsList + "]";
+    }
+
+
 }

@@ -110,7 +110,7 @@ public class NewsServiceImpl implements NewsService {
         newsRepo.findAllByCategoryCategoryName(category).parallelStream().map(item -> newsList.add(
                 new NewsDto(item.getNewsId(), item.getTitle(), item.getDescription(), item.getRegion(), item.getSource(),
                         item.getLikeCount(), item.getDate(), item.getTime(), item.getHitCount(), new AdminsDto(item.getAdmins().getEmail(),
-                        item.getAdmins().getFirstName(), item.getAdmins().getLastName(), null), this.getImageDtoList(item.getImages()),
+                        item.getAdmins().getFirstName(), item.getAdmins().getLastName(), null,false,null), this.getImageDtoList(item.getImages()),
                         this.getCommentDtoList(item.getComments()), new CategoryDto(item.getCategory().getCategoryId(), item.getCategory()
                         .getCategoryName(), null)
                 ))
