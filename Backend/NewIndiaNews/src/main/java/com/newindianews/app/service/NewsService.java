@@ -32,5 +32,6 @@ public interface NewsService {
 
     CommentDto postComment(long newsId, CommentDto comment);
 
+	NewsDto addNews(NewsDto newsDto) throws ServiceException;
 
 }

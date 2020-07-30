@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.newindianews.app.entity.News;
 import com.newindianews.app.exception.DatabaseException;
+import com.newindianews.app.exception.NewsAlreadyExistsException;
 import com.newindianews.app.exception.ServiceException;
 import com.newindianews.app.repository.NewsRepository;
 import com.newindianews.app.service.NewsService;
@@ -37,6 +38,49 @@ public class NewsServiceImpl implements NewsService {
     private News convertNewsDtoToEntity(NewsDto newsDto) {
         return modelMapper.map(newsDto, News.class);
     }
+
+    
+    
+	@Override
+	public NewsDto addNews(NewsDto newsDto) throws ServiceException {
+		// TODO Auto-generated method stub
+		News news = convertNewsDtoToEntity(newsDto);
+
+//		Admins admin = adminRepo.findById(news.getAdmins().getEmail()).get();
+//	    List<News> newsListAdmin= admin.getNewsList();
+//	    newsListAdmin.add(news);
+//	    admin.setNewsList(newsListAdmin);
+//	    adminRepo.save(admin);
+//	    
+//	    
+//	    Category category = categoryRepo.findById((long) news.getCategory().getCategoryId()).get();
+//	   System.out.println("=============="+category.getCategoryName());
+//	    List<News> newsListCategory = category.getNews();
+//	    newsListCategory.add(news);
+//	    category.setNews(newsListCategory);
+//	    categoryRepo.save(category);
+
+		if (news.getImages() != null) {
+			List<Image> images = news.getImages();
+			for (Image image : images) {
+				image.setNews(news);
+				//images.add(image);
+			}
+			//news.setImages(images);
+		}
+		if (news.getComments() != null) {
+			List<Comment> comments = news.getComments();
+			for (Comment comment : comments) {
+				comment.setNews(news);
+				//	comments.add(comment);
+			}
+			//	news.setComments(comments);
+		}
+		if (newsRepo.existsById(newsDto.getNewsId())) {
+			throw new NewsAlreadyExistsException("News Already Exists!!");
+		}
+		return convertNewsEntityToDto(newsRepo.save(news));
+	}
 
 
 //

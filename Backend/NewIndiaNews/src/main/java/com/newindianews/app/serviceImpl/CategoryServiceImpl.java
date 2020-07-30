@@ -1,5 +1,8 @@
 package com.newindianews.app.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +36,16 @@ public class CategoryServiceImpl implements CategoryService{
 	private Category convertCategoryDtoToEntity(CategoryDto categoryDto)
 	{
 		return modelMapper.map(categoryDto, Category.class);
+	}
+	@Override
+	public List<CategoryDto> getAllCategories() throws ServiceException {
+		// TODO Auto-generated method stub
+		List<Category> categories = categoryRepo.findAll();
+		List<CategoryDto> categoryDtos = new ArrayList<CategoryDto>();
+		for (Category category : categories) {
+			CategoryDto categoryDto = convertCategoryEntityToDto(category);
+			categoryDtos.add(categoryDto);
+		}
+		return categoryDtos;
 	}
 }

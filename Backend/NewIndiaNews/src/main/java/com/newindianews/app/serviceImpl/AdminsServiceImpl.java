@@ -71,46 +71,34 @@ public class AdminsServiceImpl implements AdminsService {
 	}
 
 
-	@Override
-	public NewsDto addNews(NewsDto newsDto) throws ServiceException {
-		// TODO Auto-generated method stub
-		News news = convertNewsDtoToEntity(newsDto);
-
-//		Admins admin = adminRepo.findById(news.getAdmins().getEmail()).get();
-//	    List<News> newsListAdmin= admin.getNewsList();
-//	    newsListAdmin.add(news);
-//	    admin.setNewsList(newsListAdmin);
-//	    adminRepo.save(admin);
-//	    
-//	    
-//	    Category category = categoryRepo.findById((long) news.getCategory().getCategoryId()).get();
-//	   System.out.println("=============="+category.getCategoryName());
-//	    List<News> newsListCategory = category.getNews();
-//	    newsListCategory.add(news);
-//	    category.setNews(newsListCategory);
-//	    categoryRepo.save(category);
-
-		if (news.getImages() != null) {
-			List<Image> images = news.getImages();
-			for (Image image : images) {
-				image.setNews(news);
-				//images.add(image);
-			}
-			//news.setImages(images);
-		}
-		if (news.getComments() != null) {
-			List<Comment> comments = news.getComments();
-			for (Comment comment : comments) {
-				comment.setNews(news);
-				//	comments.add(comment);
-			}
-			//	news.setComments(comments);
-		}
-		if (newsRepo.existsById(newsDto.getNewsId())) {
-			throw new NewsAlreadyExistsException("News Already Exists!!");
-		}
-		return convertNewsEntityToDto(newsRepo.save(news));
-	}
+//	@Override
+//	public NewsDto addNews(NewsDto newsDto) throws ServiceException {
+//		// TODO Auto-generated method stub
+//		News news = convertNewsDtoToEntity(newsDto);
+//
+//
+//
+//		if (news.getImages() != null) {
+//			List<Image> images = news.getImages();
+//			for (Image image : images) {
+//				image.setNews(news);
+//				//images.add(image);
+//			}
+//			//news.setImages(images);
+//		}
+//		if (news.getComments() != null) {
+//			List<Comment> comments = news.getComments();
+//			for (Comment comment : comments) {
+//				comment.setNews(news);
+//				//	comments.add(comment);
+//			}
+//			//	news.setComments(comments);
+//		}
+//		if (newsRepo.existsById(newsDto.getNewsId())) {
+//			throw new NewsAlreadyExistsException("News Already Exists!!");
+//		}
+//		return convertNewsEntityToDto(newsRepo.save(news));
+//	}
 
 
 	@Override
@@ -168,4 +156,27 @@ public class AdminsServiceImpl implements AdminsService {
 		}
 		return isLoggedIn;
 	}
+
+	@Override
+	public AdminsDto getAdminDetailByMailId(String adminEmail) throws ServiceException {
+		// TODO Auto-generated method stub
+		Admins admin = adminRepo.findById(adminEmail).get();
+		AdminsDto adminsDto= new AdminsDto();
+		adminsDto.setEmail(admin.getEmail());
+		adminsDto.setFirstName(admin.getFirstName());
+		adminsDto.setLastName(admin.getLastName());
+		adminsDto.setPassword(admin.getPassword());
+		adminsDto.setApproval(admin.isApproval());
+//		List<News> newsList = admin.getNewsList();
+//		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
+//		for (News news : newsList) {
+//			NewsDto newsDto = convertNewsEntityToDto(news);
+//			newsDtos.add(newsDto);
+//		}
+//		adminsDto.setNewsList(newsDtos);
+		return adminsDto;
+		//return convertAdminsEntityToDto(admin);
+	
+	}
+	
 }

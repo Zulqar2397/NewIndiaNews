@@ -40,6 +40,7 @@ public class Admins {
     private boolean approval;
 
     @OneToMany(mappedBy = "admins", cascade = CascadeType.PERSIST)
+   
     private List<News> newsList;
 
     public Admins() {
@@ -48,7 +49,7 @@ public class Admins {
 
     public Admins(String email, String firstName, String lastName, String password, boolean approval,
                   List<News> newsList) {
-        super();
+        
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;

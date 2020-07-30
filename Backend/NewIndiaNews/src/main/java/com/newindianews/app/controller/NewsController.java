@@ -14,12 +14,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/news")
-@CrossOrigin
+@CrossOrigin("*")
 public class NewsController {
     @Autowired
     NewsService newsService;
 
-
+    @PostMapping("/add-news")
+	public ResponseEntity<ResponseDto<NewsDto>> addNews(@RequestBody NewsDto newsDto) throws AppException
+	{
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<NewsDto>(newsService.addNews(newsDto),null,"Assigned",true));
+	}
+    
 //@GetMapping("/getAllNews")
 //public ResponseEntity<ResponseDto<List<News>>> getAllNews() throws AppException
 //{
