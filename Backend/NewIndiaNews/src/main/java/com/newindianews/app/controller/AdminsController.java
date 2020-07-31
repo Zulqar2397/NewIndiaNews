@@ -44,13 +44,13 @@ public class AdminsController {
 //		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<NewsDto>(adminsService.addNews(newsDto),null,"Assigned",true));
 //	}
 	
-	@GetMapping("/getNewsByAdmin/{adminEmail}")
-	public ResponseEntity<ResponseDto<List<News>>> getNewsByAdmin(@PathVariable String adminEmail ) throws AppException
+	@GetMapping("/get-news-by-admin/{adminEmail}")
+	public ResponseEntity<ResponseDto<List<NewsDto>>> getNewsByAdmin(@PathVariable String adminEmail ) throws AppException
 	{
-		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<News>>(adminsService.getNewsByAdmin(adminEmail),null,"Retrieved Data",true));
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(adminsService.getNewsByAdmin(adminEmail),null,"Retrieved Data",true));
 	}
 	
-	@GetMapping("/getAdminDetailByMailId/{adminEmail}")
+	@GetMapping("/get-admin-details/{adminEmail}")
 	public ResponseEntity<ResponseDto<AdminsDto>> getAdminDetailByMailId(@PathVariable String adminEmail ) throws AppException
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<AdminsDto>(adminsService.getAdminDetailByMailId(adminEmail),null,"Retrieved Data",true));

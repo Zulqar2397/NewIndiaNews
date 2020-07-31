@@ -18,7 +18,7 @@ public interface AdminsService {
 
 //	NewsDto addNews(NewsDto newsDto) throws ServiceException;
 
-	List<News> getNewsByAdmin(String adminEmail) throws ServiceException, DatabaseException;
+	List<NewsDto> getNewsByAdmin(String adminEmail) throws ServiceException, DatabaseException;
 
 	AdminsDto getAdminDetailByMailId(String adminEmail) throws ServiceException;
 
