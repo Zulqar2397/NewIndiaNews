@@ -101,4 +101,11 @@ public class NewsController {
 
     }
 
+    @GetMapping("/get-most-liked-news")
+    public ResponseEntity<ResponseDto<List<NewsDto>>> getMostLikedNewsList() {
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getMostLikedNewsList(), null, "Assigned", true));
+
+    }
+
 }

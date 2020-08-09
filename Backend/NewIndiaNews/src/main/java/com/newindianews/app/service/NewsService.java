@@ -33,12 +33,14 @@ public interface NewsService {
 
     CommentDto postComment(long newsId, CommentDto comment);
 
-	NewsDto addNews(NewsDto newsDto) throws ServiceException;
+    NewsDto addNews(NewsDto newsDto) throws ServiceException;
 
-	List<NewsDto> getRecentNews();
+    List<NewsDto> getRecentNews();
 
-	List<NewsDto> getPopularNewsList();
+    List<NewsDto> getPopularNewsList();
 
-	List<NewsDto> convertEntityToDTO(List<News> news);
+    List<NewsDto> getMostLikedNewsList();
+
+    List<NewsDto> convertEntityToDTO(List<News> news);
 
 }

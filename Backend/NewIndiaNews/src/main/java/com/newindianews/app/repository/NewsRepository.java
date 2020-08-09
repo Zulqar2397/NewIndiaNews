@@ -34,4 +34,7 @@ public interface NewsRepository extends JpaRepository<News, Long> {
 
     @Query(value = "Select * from news where category_id=4 ORDER BY hit_count DESC LIMIT 4", nativeQuery = true)
     public List<News> getPopularTechnologyNews();
+
+    @Query(value = "Select * from news ORDER BY like_count DESC LIMIT 5", nativeQuery = true)
+    public List<News> getMostLikedNews();
 }

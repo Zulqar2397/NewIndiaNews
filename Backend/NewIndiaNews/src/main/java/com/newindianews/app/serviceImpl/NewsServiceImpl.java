@@ -81,6 +81,11 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    public List<NewsDto> getMostLikedNewsList() {
+        return this.convertEntityToDTO(newsRepo.getMostLikedNews());
+    }
+
+    @Override
     public List<NewsDto> convertEntityToDTO(List<News> news) {
         List<NewsDto> newsList = new ArrayList<NewsDto>();
         news.parallelStream().map(item -> newsList.add(
