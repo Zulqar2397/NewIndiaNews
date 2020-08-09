@@ -1,25 +1,24 @@
 package com.newindianews.app.serviceImpl;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.newindianews.app.dto.*;
 import com.newindianews.app.entity.Comment;
 import com.newindianews.app.entity.Image;
+import com.newindianews.app.entity.News;
+import com.newindianews.app.exception.DatabaseException;
+import com.newindianews.app.exception.NewsAlreadyExistsException;
+import com.newindianews.app.exception.ServiceException;
 import com.newindianews.app.repository.CommentRepository;
+import com.newindianews.app.repository.NewsRepository;
+import com.newindianews.app.service.NewsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.newindianews.app.entity.News;
-import com.newindianews.app.exception.DatabaseException;
-import com.newindianews.app.exception.NewsAlreadyExistsException;
-import com.newindianews.app.exception.ServiceException;
-import com.newindianews.app.repository.NewsRepository;
-import com.newindianews.app.service.NewsService;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -39,48 +38,42 @@ public class NewsServiceImpl implements NewsService {
         return modelMapper.map(newsDto, News.class);
     }
 
-    
-    
-	@Override
-	public NewsDto addNews(NewsDto newsDto) throws ServiceException {
-		// TODO Auto-generated method stub
-		News news = convertNewsDtoToEntity(newsDto);
 
-//		Admins admin = adminRepo.findById(news.getAdmins().getEmail()).get();
-//	    List<News> newsListAdmin= admin.getNewsList();
-//	    newsListAdmin.add(news);
-//	    admin.setNewsList(newsListAdmin);
-//	    adminRepo.save(admin);
-//	    
-//	    
-//	    Category category = categoryRepo.findById((long) news.getCategory().getCategoryId()).get();
-//	   System.out.println("=============="+category.getCategoryName());
-//	    List<News> newsListCategory = category.getNews();
-//	    newsListCategory.add(news);
-//	    category.setNews(newsListCategory);
-//	    categoryRepo.save(category);
+    @Override
+    public NewsDto addNews(NewsDto newsDto) throws ServiceException {
+        // TODO Auto-generated method stub
+        News news = convertNewsDtoToEntity(newsDto);
+        if (news.getImages() != null) {
+            List<Image> images = news.getImages();
+            for (Image image : images) {
+                image.setNews(news);
+                //images.add(image);
+            }
+            //news.setImages(images);
+        }
+        if (news.getComments() != null) {
+            List<Comment> comments = news.getComments();
+            for (Comment comment : comments) {
+                comment.setNews(news);
+                //	comments.add(comment);
+            }
+            //	news.setComments(comments);
+        }
+        if (newsRepo.existsById(newsDto.getNewsId())) {
+            throw new NewsAlreadyExistsException("News Already Exists!!");
+        }
+        return convertNewsEntityToDto(newsRepo.save(news));
+    }
 
-		if (news.getImages() != null) {
-			List<Image> images = news.getImages();
-			for (Image image : images) {
-				image.setNews(news);
-				//images.add(image);
-			}
-			//news.setImages(images);
-		}
-		if (news.getComments() != null) {
-			List<Comment> comments = news.getComments();
-			for (Comment comment : comments) {
-				comment.setNews(news);
-				//	comments.add(comment);
-			}
-			//	news.setComments(comments);
-		}
-		if (newsRepo.existsById(newsDto.getNewsId())) {
-			throw new NewsAlreadyExistsException("News Already Exists!!");
-		}
-		return convertNewsEntityToDto(newsRepo.save(news));
-	}
+    @Override
+    public List<NewsDto> getRecentNews() {
+
+        return newsRepo.getRecentNews().parallelStream().map(news -> {
+            NewsDto newsDto = new NewsDto();
+            BeanUtils.copyProperties(news, newsDto);
+            return newsDto;
+        }).collect(Collectors.toList());
+    }
 
 
 //
@@ -154,7 +147,7 @@ public class NewsServiceImpl implements NewsService {
         newsRepo.findAllByCategoryCategoryName(category).parallelStream().map(item -> newsList.add(
                 new NewsDto(item.getNewsId(), item.getTitle(), item.getDescription(), item.getRegion(), item.getSource(),
                         item.getLikeCount(), item.getDate(), item.getTime(), item.getHitCount(), new AdminsDto(item.getAdmins().getEmail(),
-                        item.getAdmins().getFirstName(), item.getAdmins().getLastName(), null,false,null), this.getImageDtoList(item.getImages()),
+                        item.getAdmins().getFirstName(), item.getAdmins().getLastName(), null, false, null), this.getImageDtoList(item.getImages()),
                         this.getCommentDtoList(item.getComments()), new CategoryDto(item.getCategory().getCategoryId(), item.getCategory()
                         .getCategoryName(), null)
                 ))

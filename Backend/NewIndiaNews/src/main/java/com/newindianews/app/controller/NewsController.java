@@ -87,4 +87,11 @@ public class NewsController {
 
     }
 
+    @GetMapping("/get-recent-news")
+    public ResponseEntity<ResponseDto<List<NewsDto>>> getRecentNews() {
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getRecentNews(), null, "Assigned", true));
+
+    }
+
 }

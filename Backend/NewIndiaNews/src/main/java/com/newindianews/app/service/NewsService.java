@@ -34,4 +34,6 @@ public interface NewsService {
 
 	NewsDto addNews(NewsDto newsDto) throws ServiceException;
 
+	List<NewsDto> getRecentNews();
+
 }
