@@ -5,6 +5,7 @@ import com.newindianews.app.dto.ImageDto;
 import com.newindianews.app.dto.NewsDto;
 import com.newindianews.app.entity.Comment;
 import com.newindianews.app.entity.Image;
+import com.newindianews.app.entity.News;
 import com.newindianews.app.exception.DatabaseException;
 import com.newindianews.app.exception.ServiceException;
 
@@ -35,5 +36,9 @@ public interface NewsService {
 	NewsDto addNews(NewsDto newsDto) throws ServiceException;
 
 	List<NewsDto> getRecentNews();
+
+	List<NewsDto> getPopularNewsList();
+
+	List<NewsDto> convertEntityToDTO(List<News> news);
 
 }

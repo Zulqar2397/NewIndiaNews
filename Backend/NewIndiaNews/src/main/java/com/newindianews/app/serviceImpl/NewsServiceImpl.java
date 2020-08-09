@@ -67,12 +67,32 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<NewsDto> getRecentNews() {
+        return this.convertEntityToDTO(newsRepo.getRecentNews());
+    }
 
-        return newsRepo.getRecentNews().parallelStream().map(news -> {
-            NewsDto newsDto = new NewsDto();
-            BeanUtils.copyProperties(news, newsDto);
-            return newsDto;
-        }).collect(Collectors.toList());
+    @Override
+    public List<NewsDto> getPopularNewsList() {
+        List<News> newsList = new ArrayList<>();
+        newsList = newsRepo.getPopularPoliticsNews();
+        newsList.addAll(newsRepo.getPopularBusinessAndEconomyNews());
+        newsList.addAll(newsRepo.getPopularWorldNews());
+        newsList.addAll(newsRepo.getPopularTechnologyNews());
+        return this.convertEntityToDTO(newsList);
+    }
+
+    @Override
+    public List<NewsDto> convertEntityToDTO(List<News> news) {
+        List<NewsDto> newsList = new ArrayList<NewsDto>();
+        news.parallelStream().map(item -> newsList.add(
+                new NewsDto(item.getNewsId(), item.getTitle(), item.getDescription(), item.getRegion(), item.getSource(),
+                        item.getLikeCount(), item.getDate(), item.getTime(), item.getHitCount(), new AdminsDto(item.getAdmins().getEmail(),
+                        item.getAdmins().getFirstName(), item.getAdmins().getLastName(), null, false, null), this.getImageDtoList(item.getImages()),
+                        this.getCommentDtoList(item.getComments()), new CategoryDto(item.getCategory().getCategoryId(), item.getCategory()
+                        .getCategoryName(), null)
+                ))
+        ).collect(Collectors.toList());
+
+        return newsList;
     }
 
 
@@ -141,19 +161,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<NewsDto> getNewsByCategory(String category) throws ServiceException, DatabaseException {
-        List<NewsDto> newsList = new ArrayList<NewsDto>();
-
-
-        newsRepo.findAllByCategoryCategoryName(category).parallelStream().map(item -> newsList.add(
-                new NewsDto(item.getNewsId(), item.getTitle(), item.getDescription(), item.getRegion(), item.getSource(),
-                        item.getLikeCount(), item.getDate(), item.getTime(), item.getHitCount(), new AdminsDto(item.getAdmins().getEmail(),
-                        item.getAdmins().getFirstName(), item.getAdmins().getLastName(), null, false, null), this.getImageDtoList(item.getImages()),
-                        this.getCommentDtoList(item.getComments()), new CategoryDto(item.getCategory().getCategoryId(), item.getCategory()
-                        .getCategoryName(), null)
-                ))
-        ).collect(Collectors.toList());
-
-        return newsList;
+        return this.convertEntityToDTO(newsRepo.findAllByCategoryCategoryName(category));
     }
 
 

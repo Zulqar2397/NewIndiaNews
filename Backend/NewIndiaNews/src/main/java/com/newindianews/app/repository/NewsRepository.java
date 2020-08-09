@@ -1,14 +1,12 @@
 package com.newindianews.app.repository;
 
-import java.util.List;
-
+import com.newindianews.app.entity.News;
+import com.newindianews.app.exception.DatabaseException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.newindianews.app.dto.NewsDto;
-import com.newindianews.app.entity.News;
-import com.newindianews.app.exception.DatabaseException;
+import java.util.List;
 
 @Repository
 public interface NewsRepository extends JpaRepository<News, Long> {
@@ -25,6 +23,15 @@ public interface NewsRepository extends JpaRepository<News, Long> {
     @Query(value = "Select * from news ORDER BY news_id DESC LIMIT 5", nativeQuery = true)
     public List<News> getRecentNews();
 
-    @Query(value = "Select * from(select * from news where category_id IN(1,2)ORDER BY hit_count DESC) as a ORDER BY category_id DESC;", nativeQuery = true)
-    public List<News> getNewsWithMaxHitsOfSelectedCategories();
+    @Query(value = "Select * from news where category_id=1 ORDER BY hit_count DESC LIMIT 4", nativeQuery = true)
+    public List<News> getPopularPoliticsNews();
+
+    @Query(value = "Select * from news where category_id=2 ORDER BY hit_count DESC LIMIT 4", nativeQuery = true)
+    public List<News> getPopularBusinessAndEconomyNews();
+
+    @Query(value = "Select * from news where category_id=3 ORDER BY hit_count DESC LIMIT 4", nativeQuery = true)
+    public List<News> getPopularWorldNews();
+
+    @Query(value = "Select * from news where category_id=4 ORDER BY hit_count DESC LIMIT 4", nativeQuery = true)
+    public List<News> getPopularTechnologyNews();
 }

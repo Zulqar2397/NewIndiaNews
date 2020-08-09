@@ -2,25 +2,18 @@ package com.newindianews.app.dto;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.newindianews.app.entity.News;
-
 public class CategoryDto {
-	
-	private int categoryId;
-	
-	
-	private String categoryName;
 
-//	@JsonIgnore
-	private List<News> news;
-	
+    private int categoryId;
+
+    private String categoryName;
+
+    private List<NewsDto> news;
+
 	public CategoryDto() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public CategoryDto(int categoryId, String categoryName, List<News> news) {
-		super();
+	public CategoryDto(int categoryId, String categoryName, List<NewsDto> news) {
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 		this.news = news;
@@ -41,20 +34,12 @@ public class CategoryDto {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
-	@JsonIgnore
-	public List<News> getNews() {
+
+	public List<NewsDto> getNews() {
 		return news;
 	}
 
-	public void setNews(List<News> news) {
+	public void setNews(List<NewsDto> news) {
 		this.news = news;
 	}
-
-	@Override
-	public String toString() {
-		return "CategoryDto [categoryId=" + categoryId + ", categoryName=" + categoryName + ", news=" + news + "]";
-	}
-	
-	
 }

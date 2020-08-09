@@ -94,4 +94,11 @@ public class NewsController {
 
     }
 
+    @GetMapping("/get-popular-newslist")
+    public ResponseEntity<ResponseDto<List<NewsDto>>> getPopularNewsList() {
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<List<NewsDto>>(newsService.getPopularNewsList(), null, "Assigned", true));
+
+    }
+
 }
