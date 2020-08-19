@@ -2,6 +2,8 @@ package com.newindianews.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
@@ -48,20 +50,22 @@ public class News {
     @Value("0")
     private long hitCount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "adminEmail", nullable = false)
     @JsonIgnoreProperties("newsList")
     private Admins admins;
 
-    @OneToMany(mappedBy = "news", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "news", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonIgnoreProperties("news")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Image> images;
 
-    @OneToMany(mappedBy = "news", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "news", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonIgnoreProperties("news")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Comment> comments;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId", nullable = false)
     private Category category;
 

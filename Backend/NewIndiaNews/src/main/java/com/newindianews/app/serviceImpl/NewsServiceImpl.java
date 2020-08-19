@@ -88,15 +88,13 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<NewsDto> convertEntityToDTO(List<News> news) {
         List<NewsDto> newsList = new ArrayList<NewsDto>();
-        news.parallelStream().map(item -> newsList.add(
+        news.forEach(item -> newsList.add(
                 new NewsDto(item.getNewsId(), item.getTitle(), item.getDescription(), item.getRegion(), item.getSource(),
                         item.getLikeCount(), item.getDate(), item.getTime(), item.getHitCount(), new AdminsDto(item.getAdmins().getEmail(),
                         item.getAdmins().getFirstName(), item.getAdmins().getLastName(), null, false, null), this.getImageDtoList(item.getImages()),
                         this.getCommentDtoList(item.getComments()), new CategoryDto(item.getCategory().getCategoryId(), item.getCategory()
                         .getCategoryName(), null)
-                ))
-        ).collect(Collectors.toList());
-
+                )));
         return newsList;
     }
 
@@ -181,16 +179,16 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<ImageDto> getImageDtoList(List<Image> images) {
         List<ImageDto> imagesDto = new ArrayList<ImageDto>();
-        images.stream().map(
-                img -> imagesDto.add(new ImageDto(img.getImageId(), img.getImageUrl(), null))).collect(Collectors.toList());
+        images.forEach(
+                img -> imagesDto.add(new ImageDto(img.getImageId(), img.getImageUrl(), null)));
         return imagesDto;
     }
 
     @Override
     public List<CommentDto> getCommentDtoList(List<Comment> comments) {
         List<CommentDto> commentsDto = new ArrayList<CommentDto>();
-        comments.stream().map(
-                com -> commentsDto.add(new CommentDto(com.getCommentId(), com.getPostedBy(), com.getPostedDate(), com.getComment(), null))).collect(Collectors.toList());
+        comments.forEach(
+                com -> commentsDto.add(new CommentDto(com.getCommentId(), com.getPostedBy(), com.getPostedDate(), com.getComment(), null)));
         return commentsDto;
     }
 

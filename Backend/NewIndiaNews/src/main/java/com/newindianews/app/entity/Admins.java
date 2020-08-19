@@ -2,13 +2,10 @@ package com.newindianews.app.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.sun.istack.NotNull;
@@ -39,8 +36,7 @@ public class Admins {
     @Value("false")
     private boolean approval;
 
-    @OneToMany(mappedBy = "admins", cascade = CascadeType.PERSIST)
-   
+    @OneToMany(mappedBy = "admins", cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     private List<News> newsList;
 
     public Admins() {

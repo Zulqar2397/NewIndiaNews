@@ -1,15 +1,11 @@
 package com.newindianews.app.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "comment")
@@ -28,7 +24,7 @@ private Date postedDate;
 @Column(name = "comment")
 private String comment;
 
-@ManyToOne
+@ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "newsId",nullable = true)
 private News news;
 

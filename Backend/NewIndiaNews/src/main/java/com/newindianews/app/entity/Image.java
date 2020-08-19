@@ -1,15 +1,10 @@
 package com.newindianews.app.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "images")
@@ -27,7 +22,7 @@ public class Image {
 	@ManyToOne
 	@JoinColumn(name = "newsId",nullable=true)
 	private News news;
-	
+
 	public Image() {
 		// TODO Auto-generated constructor stub
 	}
