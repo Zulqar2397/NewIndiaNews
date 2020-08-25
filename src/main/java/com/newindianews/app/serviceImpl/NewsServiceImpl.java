@@ -44,6 +44,10 @@ public class NewsServiceImpl implements NewsService {
 		if (newsRepo.existsById(newsDto.getNewsId())) {
 			throw new NewsAlreadyExistsException("News Already Exists!!");
 		}
+		for(Image image:news.getImages())
+		{
+			image.setNews(news);
+		}
 		long millis = System.currentTimeMillis();
 		java.sql.Date date = new java.sql.Date(millis);
 		news.setDate(date);
